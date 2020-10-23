@@ -7,7 +7,6 @@ import { HttpService } from './http.service';
 export class AuthService {
   endPoint: String = "auth";
   userAuth : boolean = false;
-  showMenuEmitter = new EventEmitter<boolean>();
 
   constructor(private http: HttpService) { }
 

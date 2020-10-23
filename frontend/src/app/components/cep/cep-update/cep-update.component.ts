@@ -38,6 +38,8 @@ export class CepUpdateComponent implements OnInit {
     this.cepService.update(this.cep, id).subscribe(() => {
       this.utilService.showMessage("CEP & Cidade atualizado com sucesso!");
       this.router.navigate(["/ceps"]);
+    }, () => {
+      this.utilService.showMessage("CEP inválido", true);
     });
   }
 

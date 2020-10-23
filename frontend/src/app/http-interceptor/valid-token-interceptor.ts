@@ -21,7 +21,6 @@ export class ValidTokenInterceptor implements HttpInterceptor {
                     let errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
                     if (error.status === 401) {
                         this.cache.accessToken = null;
-                        this.authService.showMenuEmitter.emit(false);
                         this.authService.userAuth = false;
                         this.router.navigateByUrl('/login');
                     }

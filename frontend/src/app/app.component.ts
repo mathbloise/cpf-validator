@@ -7,12 +7,9 @@ import { AuthService } from './services/auth.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
-  showMenu: boolean = true;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.showMenuEmitter.subscribe(
-      show => this.showMenu = show
-    );
+    this.authService.userAuth = true;
   }
 }

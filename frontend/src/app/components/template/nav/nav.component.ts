@@ -9,23 +9,20 @@ import { UtilService } from '../../../services/util.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  showMenu: boolean = true;
-
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private utilService: UtilService,
-    private router: Router) { }
+    private router: Router) { 
+      this.authService.userAuth = true
+    }
 
   ngOnInit() {
-    this.authService.showMenuEmitter.subscribe(
-      show => this.showMenu = show
-    );
+    this.authService.userAuth = true
   }
 
   logout() {
     this.authService.logout().subscribe(() => {
-      this.authService.showMenuEmitter.emit(false);
-      this.showMenu = false;
+      this.authService.userAuth = false;
       localStorage.removeItem('access_token');
       this.router.navigateByUrl('/login');
       this.utilService.showMessage("Deslogado com sucesso...");

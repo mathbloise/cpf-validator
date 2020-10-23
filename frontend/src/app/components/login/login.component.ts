@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CacheService } from '../../services/cache.service';
 import { User } from '../../models/user.model';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private cacheService: CacheService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private utilService: UtilService) { }
 
   ngOnInit(): void {
+    this.authService.userAuth = false;
   }
 
   login() {
@@ -27,11 +30,11 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('access_token', response.body.access_token);
       this.cacheService.accessToken = response.body.access_token;
       this.authService.userAuth = true;
-      this.authService.showMenuEmitter.emit(true);
       this.router.navigateByUrl('/home');
+      this.utilService.showMessage("Usuário logado com sucesso");
     }, () => {
       this.authService.userAuth = false;
-      this.authService.showMenuEmitter.emit(false);
+      this.utilService.showMessage("E-mail ou Senha inválido", true);
     });
   }
 
