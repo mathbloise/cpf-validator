@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>Excluir CEP / Cidade</mat-card-title>
+    <form>
+        <mat-form-field>
+            <input matInput placeholder="Cep" [(ngModel)]="cep.cep" name="cep" mask="00000-000" disabled>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Cidade" [(ngModel)]="cep.city" name="city" disabled>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button (click)="deleteCep()" color="warn">
+        Excluir
+    </button>
+
+    <button mat-raised-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card>
